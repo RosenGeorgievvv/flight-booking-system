@@ -1,9 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BookingForm from './components/BookingForm'
-
-
 
 function App() {
 
@@ -13,6 +11,7 @@ function App() {
   const [arrivingAir, setArrivingAir] = useState(0);
   const [departureDate, setDepartureDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
+  const [flightData, setFlightData] = useState([]);
 
   console.log(firstName)
   console.log(lastName)
@@ -21,9 +20,16 @@ function App() {
   console.log(departureDate)
   console.log(returnDate)
 
-  const postData = (data) => {
-    const token = 'JU19y1QSmyW18urRqSfBoMYt3HH413'
+  const token = 'JU19y1QSmyW18urRqSfBoMYt3HH413'
 
+  const onUpdate = (data) => {
+    fetch(`https://vm-fe-interview-task.herokuapp.com/api/bookings?authToken=${token}&pageIndex=0`)
+      .then(response => response.json())
+      .then(data => setFlightData(data.list));
+  }
+
+
+  const onCreate = (data) => {
 
     fetch(`https://vm-fe-interview-task.herokuapp.com/api/bookings/create?authToken=${token}`, {
       method: 'POST',
@@ -38,12 +44,10 @@ function App() {
       .catch(error => {
         console.log(error)
       })
-
   }
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
 
     if (firstName && lastName && departureAir && arrivingAir && departureDate && returnDate) {
       const data = {
@@ -54,26 +58,38 @@ function App() {
         departureDate: departureDate,
         returnDate: returnDate
       }
-      postData(data);
+      onCreate(data);
 
     } else {
       alert('Please fill up all the fields!')
     }
   }
 
+  useEffect(() => {
+    onUpdate();
+  }, [])
 
 
   return (
-    <div className="justify-content-center d-flex" >
-      <BookingForm
-        setFirstName={setFirstName}
-        setLastName={setLastName}
-        setDepartureAir={setDepartureAir}
-        setArrivingAir={setArrivingAir}
-        setDepartureDate={setDepartureDate}
-        setReturnDate={setReturnDate}
-        onSubmitHandler={onSubmitHandler}
-      />
+    <div>
+      <div className="justify-content-center d-flex" >
+        <BookingForm
+          setFirstName={setFirstName}
+          setLastName={setLastName}
+          setDepartureAir={setDepartureAir}
+          setArrivingAir={setArrivingAir}
+          setDepartureDate={setDepartureDate}
+          setReturnDate={setReturnDate}
+          onSubmitHandler={onSubmitHandler}
+        />
+      </div>
+      <div className="justify-content-center d-flex mt-5">
+        <ul>
+          {flightData.map((flight, i) => (
+            <li key={i}>{flight.id}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
