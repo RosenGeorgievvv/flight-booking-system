@@ -1,7 +1,16 @@
 import React from 'react'
-import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
-const BookingForm = () => {
+
+const BookingForm = ({ setFirstName,
+  setLastName,
+  setDepartureAir,
+  setArrivingAir,
+  setDepartureDate,
+  setReturnDate,
+  onSubmitHandler }) => {
+
+
   return (
     <div className="w-50">
       <Form>
@@ -9,7 +18,7 @@ const BookingForm = () => {
           <Label htmlFor="first-name">
             First Name
           </Label>
-          <Input
+          <Input onChange={(e) => setFirstName(e.target.value)}
             id="firstName"
             name="firstName"
             placeholder="First Name"
@@ -20,7 +29,7 @@ const BookingForm = () => {
           <Label htmlFor="last-name">
             Last Name
           </Label>
-          <Input
+          <Input onChange={(e) => setLastName(e.target.value)}
             id="lastName"
             name="lastName"
             placeholder="Last Name"
@@ -31,29 +40,29 @@ const BookingForm = () => {
           <Label htmlFor="departure-airport">
             Departure Airport
           </Label>
-          <Input
+          <Input onChange={(e) => setDepartureAir(e.target.value)}
             id="departureAirport"
             name="departureAirport"
             placeholder="Departure Airport"
-            type="text"
+            type="number"
           />
         </FormGroup>
         <FormGroup>
           <Label htmlFor="arriving-airport">
             Arriving Airport
           </Label>
-          <Input
+          <Input onChange={(e) => setArrivingAir(e.target.value)}
             id="arrivingAirport"
             name="arrivingAirport"
             placeholder="Arriving airport"
-            type="text"
+            type="number"
           />
         </FormGroup>
         <FormGroup>
           <Label htmlFor="departure-date">
             Departure Date
           </Label>
-          <Input
+          <Input onChange={(e) => setDepartureDate(e.target.value)}
             id="departureDate"
             name="departureDate"
             placeholder="date placeholder"
@@ -64,7 +73,7 @@ const BookingForm = () => {
           <Label htmlFor="arriving-date">
             Date of return
           </Label>
-          <Input
+          <Input onChange={(e) => setReturnDate(e.target.value)}
             id="arrivingDate"
             name="arrivingDate"
             placeholder="date placeholder"
@@ -72,7 +81,7 @@ const BookingForm = () => {
           />
         </FormGroup>
         <div className="text-center">
-          <Button >Submit</Button>
+          <Button onClick={onSubmitHandler}>Submit</Button>
         </div>
       </Form>
     </div>
