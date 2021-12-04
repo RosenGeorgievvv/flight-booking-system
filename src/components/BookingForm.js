@@ -17,7 +17,6 @@ const BookingForm = ({
   setReturnDate,
   onSubmitHandler }) => {
 
-
   return (
     <div className="w-50">
       <Form>
@@ -93,7 +92,7 @@ const BookingForm = ({
             type="date"
           />
         </FormGroup>
-        <div className="text-center color-blue">
+        <div className="text-center">
           <Button onClick={onSubmitHandler}>Submit</Button>
         </div>
       </Form>

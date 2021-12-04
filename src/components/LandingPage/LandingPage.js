@@ -49,8 +49,8 @@ function LandingPage() {
     setReturnDate('')
   }
 
-  const onSubmitHandler = () => {
-
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
 
     if (firstName && lastName && departureAir && arrivingAir && departureDate && returnDate) {
       const data = {
@@ -65,6 +65,13 @@ function LandingPage() {
       onInputClear();
     } else {
       alert('Please fill up all the fields!')
+    }
+
+    if (setReturnDate < setDepartureDate) {
+      alert('Your returning date should be greater than your departure date!')
+      onInputClear()
+    } else {
+      onCreate();
     }
   }
 
