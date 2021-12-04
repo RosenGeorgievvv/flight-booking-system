@@ -1,0 +1,12 @@
+.detailsContainer {
+    justify-content: center;
+    margin: 3% 20%;
+}
+
+.detailsTable {
+    margin-top: 5%;
+}
+
+.buttonsContainer {
+    gap: 20px;
+}
