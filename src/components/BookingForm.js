@@ -2,7 +2,14 @@ import React from 'react'
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
 
-const BookingForm = ({ setFirstName,
+const BookingForm = ({
+  firstName,
+  lastName,
+  departureAir,
+  arrivingAir,
+  departureDate,
+  returnDate,
+  setFirstName,
   setLastName,
   setDepartureAir,
   setArrivingAir,
@@ -21,6 +28,7 @@ const BookingForm = ({ setFirstName,
           <Input onChange={(e) => setFirstName(e.target.value)}
             id="firstName"
             name="firstName"
+            value={firstName}
             placeholder="First Name"
             type="text"
           />
@@ -32,6 +40,7 @@ const BookingForm = ({ setFirstName,
           <Input onChange={(e) => setLastName(e.target.value)}
             id="lastName"
             name="lastName"
+            value={lastName}
             placeholder="Last Name"
             type="text"
           />
@@ -43,6 +52,7 @@ const BookingForm = ({ setFirstName,
           <Input onChange={(e) => setDepartureAir(e.target.value)}
             id="departureAirport"
             name="departureAirport"
+            value={departureAir ? departureAir : ""}
             placeholder="Departure Airport"
             type="number"
           />
@@ -54,7 +64,8 @@ const BookingForm = ({ setFirstName,
           <Input onChange={(e) => setArrivingAir(e.target.value)}
             id="arrivingAirport"
             name="arrivingAirport"
-            placeholder="Arriving airport"
+            value={arrivingAir ? arrivingAir : ""}
+            placeholder="Arriving Airport"
             type="number"
           />
         </FormGroup>
@@ -65,6 +76,7 @@ const BookingForm = ({ setFirstName,
           <Input onChange={(e) => setDepartureDate(e.target.value)}
             id="departureDate"
             name="departureDate"
+            value={departureDate}
             placeholder="date placeholder"
             type="date"
           />
@@ -76,11 +88,12 @@ const BookingForm = ({ setFirstName,
           <Input onChange={(e) => setReturnDate(e.target.value)}
             id="arrivingDate"
             name="arrivingDate"
+            value={returnDate}
             placeholder="date placeholder"
             type="date"
           />
         </FormGroup>
-        <div className="text-center">
+        <div className="text-center color-blue">
           <Button onClick={onSubmitHandler}>Submit</Button>
         </div>
       </Form>
